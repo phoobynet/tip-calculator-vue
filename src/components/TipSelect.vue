@@ -2,19 +2,39 @@
 import Label from '@/components/Label.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 import { debouncedWatch, isNumber } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const tipOptions = [5, 10, 15, 25, 50]
 const { tip, customTip, customTipError } = useTipCalculatorStore()
 
 const customTipValue = ref<number>()
 
+watch(customTip, (newValue, oldValue) => {
+  if (!!oldValue && newValue === undefined) {
+    customTipValue.value = undefined
+  }
+})
+
+debouncedWatch(
+  tip,
+  (newValue) => {
+    if (newValue !== undefined) {
+      customTipValue.value = undefined
+    }
+  },
+  { debounce: 500 },
+)
+
 debouncedWatch(
   customTipValue,
   (newValue) => {
+    customTipError.value = ''
     if (newValue) {
       const result = parseInt(newValue.toString())
       if (isNumber(result)) {
+        if (result < 0) {
+          customTipError.value = 'error'
+        }
         customTip.value = result
         tip.value = undefined
       } else {
@@ -55,6 +75,7 @@ debouncedWatch(
         max="100"
         v-model="customTipValue"
         :aria-invalid="!!customTipError"
+        v-keys:integer
       />
     </div>
   </div>
@@ -79,14 +100,14 @@ debouncedWatch(
     }
 
     input {
-      @apply lg:px-2;
+      @apply rounded  lg:px-2;
 
       &::placeholder {
         @apply text-center;
       }
 
       &[aria-invalid='true'] {
-        @apply border-error-red;
+        @apply ring-2 ring-error-red;
       }
     }
   }

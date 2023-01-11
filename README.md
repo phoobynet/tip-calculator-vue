@@ -1,18 +1,95 @@
-# Vue 3 + TypeScript + Vite
+# Frontend Mentor - Tip calculator app solution
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a solution to the [Tip calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Recommended IDE Setup
+## Table of contents
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-## Type Support For `.vue` Imports in TS
+## Overview
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### The challenge
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Users should be able to:
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Calculate the correct tip and total cost of the bill per person
+
+### Links
+
+- Solution URL: [Tip Calculator](https://github.com/phoobynet/tip-calculator-vue)
+- Live Site URL: https://tip-calculator-vue-nu.vercel.app/
+
+## My process
+
+### Built with
+
+- Vue 3
+- Vite
+- TailwindCSS
+- Vueuse
+- SASS/SCSS
+
+**Note: These are just examples. Delete this note and replace the list above with your own choices**
+
+### What I learned
+
+Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+
+To see how you can add code snippets, see below:
+
+```html
+<h1>Some HTML code I'm proud of</h1>
+```
+```css
+.proud-of-this-css {
+  color: papayawhip;
+}
+```
+```js
+const proudOfThisFunc = () => {
+  console.log('🎉')
+}
+```
+
+If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+
+**Note: Delete this note and the content within this section and replace with your own learnings.**
+
+### Continued development
+
+Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+
+**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+
+### Useful resources
+
+- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
+- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+
+**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+
+## Author
+
+- Website - [Add your name here](https://www.your-site.com)
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+
+**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+
+## Acknowledgments
+
+This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+
+**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**

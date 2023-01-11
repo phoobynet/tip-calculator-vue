@@ -2,7 +2,7 @@
 import Label from '@/components/Label.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 import { debouncedWatch } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const { bill, billError } = useTipCalculatorStore()
 
@@ -16,6 +16,12 @@ const selectAll = () => {
   focussed.value = true
 }
 
+watch(bill, (newValue, oldValue) => {
+  if (!!oldValue && newValue === undefined) {
+    billInputValue.value = undefined
+  }
+})
+
 debouncedWatch(
   billInputValue,
   (newValue) => {
@@ -24,13 +30,14 @@ debouncedWatch(
 
     if (newValue !== undefined) {
       if (typeof newValue === 'string') {
-        billError.value = ''
+        billError.value = 'Not a valid number'
+        return
       } else {
         const parsed = parseFloat(newValue.toString())
         if (isNaN(parsed)) {
           billError.value = 'Not a valid number'
         } else if (newValue < 0) {
-          billError.value = 'Bill cannot be negative'
+          billError.value = `Can't be negative`
         } else if (newValue > 9999999.99) {
           billError.value = 'Bill is too large'
         } else {
@@ -72,10 +79,12 @@ onMounted(() => {
         ref="input"
         id="bill"
         type="number"
-        v-model="billInputValue"
+        v-model.number="billInputValue"
         placeholder="0"
         @focus="() => (focussed = true)"
         @blur="() => (focussed = false)"
+        :min="0"
+        v-keys:money
       />
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { isNumber } from '@vueuse/core'
-import { computed, reactive, toRefs, watch } from 'vue'
+import { Ref, computed, reactive, toRef, toRefs, watch } from 'vue'
 
 export interface TipCalculatorState {
   bill: number | undefined
@@ -27,11 +27,12 @@ const state = reactive<TipCalculatorState>({
 
 export const useTipCalculatorStore = () => {
   const tipPercent = computed(() => {
-    const tip = isNumber(state.customTip)
-      ? state.customTip
-      : isNumber(state.tip)
-      ? state.tip
-      : 0
+    const tip =
+      isNumber(state.customTip) && state.customTip >= 0
+        ? state.customTip
+        : isNumber(state.tip)
+        ? state.tip
+        : 0
 
     if (tip > 0) {
       return tip / 100
@@ -40,11 +41,13 @@ export const useTipCalculatorStore = () => {
     return 0
   })
 
-  const people = computed(() => (isNumber(state.people) ? state.people : 0))
-  const bill = computed(() => (isNumber(state.bill) ? state.bill : 0))
+  const peopleAmount = computed(() =>
+    isNumber(state.people) ? state.people : 0,
+  )
+  const billAmount = computed(() => (isNumber(state.bill) ? state.bill : 0))
 
   const isValid = computed(() => {
-    return bill.value > 0 && people.value > 0
+    return billAmount.value > 0 && peopleAmount.value > 0
   })
 
   const tipAmountPerPerson = computed(() => {
@@ -52,7 +55,7 @@ export const useTipCalculatorStore = () => {
       return 0
     }
 
-    return (tipPercent.value * bill.value) / people.value
+    return (tipPercent.value * billAmount.value) / peopleAmount.value
   })
 
   const totalAmountPerPerson = computed(() => {
@@ -60,19 +63,20 @@ export const useTipCalculatorStore = () => {
       return 0
     }
 
-    return (state.bill ?? 0) / (state.people ?? 0) + tipAmountPerPerson.value
+    return billAmount.value / peopleAmount.value + tipAmountPerPerson.value
   })
 
   const reset = () => {
     Object.assign(state, {
       ...DEFAULT_STATE,
+      customTip: undefined,
     })
   }
 
   return {
     ...toRefs(state),
+    reset,
     tipAmountPerPerson,
     totalAmountPerPerson,
-    reset,
   }
 }

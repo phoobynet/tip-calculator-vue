@@ -2,7 +2,7 @@
 import Label from '@/components/Label.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 import { debouncedWatch } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const { people, peopleError } = useTipCalculatorStore()
 
@@ -16,6 +16,12 @@ const selectAll = () => {
   focussed.value = true
 }
 
+watch(people, (newValue, oldValue) => {
+  if (!!oldValue && newValue === undefined) {
+    peopleInputValue.value = undefined
+  }
+})
+
 debouncedWatch(
   peopleInputValue,
   (newValue) => {
@@ -28,13 +34,13 @@ debouncedWatch(
       } else {
         const parsed = parseFloat(newValue.toString())
         if (isNaN(parsed)) {
-          peopleError.value = 'Not a valid number'
+          peopleError.value = 'Invalid tip'
         } else if (newValue < 0) {
-          peopleError.value = `Can't be negative`
+          peopleError.value = `Can't be < 0`
         } else if (newValue === 0) {
           peopleError.value = `Can't be zero`
         } else if (newValue > 999) {
-          peopleError.value = 'People is too large'
+          peopleError.value = 'Invalid tip'
         } else {
           actual = newValue
         }
@@ -77,6 +83,8 @@ debouncedWatch(
         placeholder="0"
         @focus="() => (focussed = true)"
         @blur="() => (focussed = false)"
+        :min="0"
+        v-keys:integer
       />
     </div>
   </div>
