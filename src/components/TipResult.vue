@@ -2,7 +2,8 @@
 import Money from '@/components/Money.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 
-const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
+const { tipAmountPerPerson, totalAmountPerPerson, reset } =
+  useTipCalculatorStore()
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
         <Money :amount="totalAmountPerPerson" />
       </div>
     </div>
-    <button>reset</button>
+    <button @click="reset">reset</button>
   </div>
 </template>
 
@@ -54,6 +55,10 @@ const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
 
   button {
     @apply mt-6 h-12 rounded-lg bg-strong-cyan text-sm uppercase text-very-dark-cyan;
+
+    &:hover {
+      @apply bg-light-cyan;
+    }
   }
 }
 </style>

@@ -8,10 +8,12 @@ const { bill, billError } = useTipCalculatorStore()
 
 const billInputValue = ref<number>()
 const input = ref<HTMLInputElement | null>(null)
+const focussed = ref<boolean>()
 
 const selectAll = () => {
   input.value?.select()
   input.value?.focus()
+  focussed.value = true
 }
 
 debouncedWatch(
@@ -58,6 +60,7 @@ onMounted(() => {
     <div
       class="input-container"
       :data-error="!!billError"
+      :data-focus="focussed"
     >
       <div class="icon-container">
         <img
@@ -71,6 +74,8 @@ onMounted(() => {
         type="number"
         v-model="billInputValue"
         placeholder="0"
+        @focus="() => (focussed = true)"
+        @blur="() => (focussed = false)"
       />
     </div>
   </div>
@@ -89,7 +94,7 @@ onMounted(() => {
     }
 
     &:is(:hover, [data-focus='true']) {
-      @apply ring-strong-cyan;
+      @apply ring-2 ring-strong-cyan;
     }
 
     &[data-error='true'] {

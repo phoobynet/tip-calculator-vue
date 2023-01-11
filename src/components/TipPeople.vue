@@ -2,16 +2,18 @@
 import Label from '@/components/Label.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 import { debouncedWatch } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const { people, peopleError } = useTipCalculatorStore()
 
 const peopleInputValue = ref<number>()
 const input = ref<HTMLInputElement | null>(null)
+const focussed = ref<boolean>()
 
 const selectAll = () => {
   input.value?.select()
   input.value?.focus()
+  focussed.value = true
 }
 
 debouncedWatch(
@@ -28,8 +30,10 @@ debouncedWatch(
         if (isNaN(parsed)) {
           peopleError.value = 'Not a valid number'
         } else if (newValue < 0) {
-          peopleError.value = 'People cannot be negative'
-        } else if (newValue > 9999999.99) {
+          peopleError.value = `Can't be negative`
+        } else if (newValue === 0) {
+          peopleError.value = `Can't be zero`
+        } else if (newValue > 999) {
           peopleError.value = 'People is too large'
         } else {
           actual = newValue
@@ -50,10 +54,14 @@ debouncedWatch(
     class="tip-people"
     @click="selectAll"
   >
-    <Label for="people">Number of People</Label>
+    <div class="label-container">
+      <Label for="people">Number of People</Label>
+      <div class="error">{{ peopleError }}</div>
+    </div>
     <div
       class="input-container"
       :data-error="!!peopleError"
+      :data-focus="focussed"
     >
       <div class="icon-container">
         <img
@@ -67,6 +75,8 @@ debouncedWatch(
         type="number"
         v-model="peopleInputValue"
         placeholder="0"
+        @focus="() => (focussed = true)"
+        @blur="() => (focussed = false)"
       />
     </div>
   </div>
@@ -75,6 +85,18 @@ debouncedWatch(
 <style lang="scss" scoped>
 .tip-people {
   @apply flex flex-col space-y-1;
+
+  .label-container {
+    @apply flex justify-between;
+
+    :first-child {
+      @apply flex-initial;
+    }
+
+    .error {
+      @apply text-error-red;
+    }
+  }
 
   .input-container {
     @apply grid cursor-pointer items-center overflow-hidden rounded bg-very-light-grayish-cyan ring-light-grayish-cyan;
@@ -85,7 +107,7 @@ debouncedWatch(
     }
 
     &:is(:hover, [data-focus='true']) {
-      @apply ring-strong-cyan;
+      @apply ring-2 ring-strong-cyan;
     }
 
     &[data-error='true'] {

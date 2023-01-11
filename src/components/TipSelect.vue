@@ -79,7 +79,12 @@ debouncedWatch(
     }
 
     input {
-      // TODO: Invalid custom tip
+      @apply lg:px-2;
+
+      &::placeholder {
+        @apply text-center;
+      }
+
       &[aria-invalid='true'] {
         @apply border-error-red;
       }

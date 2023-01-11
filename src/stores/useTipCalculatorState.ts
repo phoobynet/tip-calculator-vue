@@ -11,7 +11,7 @@ export interface TipCalculatorState {
   peopleError: string
 }
 
-const state = reactive<TipCalculatorState>({
+const DEFAULT_STATE: TipCalculatorState = Object.freeze({
   bill: undefined,
   billError: '',
   tip: undefined,
@@ -19,6 +19,10 @@ const state = reactive<TipCalculatorState>({
   customTipError: '',
   people: undefined,
   peopleError: '',
+})
+
+const state = reactive<TipCalculatorState>({
+  ...DEFAULT_STATE,
 })
 
 export const useTipCalculatorStore = () => {
@@ -59,9 +63,16 @@ export const useTipCalculatorStore = () => {
     return (state.bill ?? 0) / (state.people ?? 0) + tipAmountPerPerson.value
   })
 
+  const reset = () => {
+    Object.assign(state, {
+      ...DEFAULT_STATE,
+    })
+  }
+
   return {
     ...toRefs(state),
     tipAmountPerPerson,
     totalAmountPerPerson,
+    reset,
   }
 }
