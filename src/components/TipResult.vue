@@ -2,7 +2,7 @@
 import Money from '@/components/Money.vue'
 import { useTipCalculatorStore } from '@/stores/useTipCalculatorState'
 
-const { tipAmountPerPerson, totalAmountPerPerson, reset } =
+const { tipAmountPerPerson, totalAmountPerPerson, reset, isDirty } =
   useTipCalculatorStore()
 </script>
 
@@ -26,7 +26,12 @@ const { tipAmountPerPerson, totalAmountPerPerson, reset } =
         <Money :amount="totalAmountPerPerson" />
       </div>
     </div>
-    <button @click="reset">reset</button>
+    <button
+      @click="reset"
+      :disabled="!isDirty"
+    >
+      reset
+    </button>
   </div>
 </template>
 
@@ -56,8 +61,12 @@ const { tipAmountPerPerson, totalAmountPerPerson, reset } =
   button {
     @apply mt-6 h-12 rounded-lg bg-strong-cyan text-sm uppercase text-very-dark-cyan;
 
-    &:hover {
+    &:hover:enabled {
       @apply bg-light-cyan;
+    }
+
+    &:disabled {
+      @apply bg-disabled;
     }
   }
 }

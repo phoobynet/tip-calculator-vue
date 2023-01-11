@@ -37,6 +37,7 @@ module.exports = {
       'strong-cyan': 'hsl(172, 67%, 45%)',
       'very-dark-cyan': 'hsl(183, 100%, 15%)',
       'dark-grayish-cyan': 'hsl(186, 14%, 43%)',
+      disabled: 'hsl(183,79%,24%)',
       'grayish-cyan': 'hsl(184, 14%, 56%)',
       'light-cyan': 'hsl(173,61%,77%)',
       'light-grayish-cyan': 'hsl(185, 41%, 84%)',

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.10.0",
+    "deep-equal": "^2.2.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
     "pinia": "^2.0.28",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
+    "@types/deep-equal": "^1.0.1",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
     "@types/numeral": "^2.0.2",

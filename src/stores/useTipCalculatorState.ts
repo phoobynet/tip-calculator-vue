@@ -1,5 +1,6 @@
 import { isNumber } from '@vueuse/core'
-import { Ref, computed, reactive, toRef, toRefs, watch } from 'vue'
+import deepEqual from 'deep-equal'
+import { computed, reactive, toRefs } from 'vue'
 
 export interface TipCalculatorState {
   bill: number | undefined
@@ -73,10 +74,15 @@ export const useTipCalculatorStore = () => {
     })
   }
 
+  const isDirty = computed(() => {
+    return !deepEqual(DEFAULT_STATE, state)
+  })
+
   return {
     ...toRefs(state),
     reset,
     tipAmountPerPerson,
     totalAmountPerPerson,
+    isDirty,
   }
 }
