@@ -81,7 +81,7 @@ onMounted(() => {
   @apply flex flex-col space-y-1;
 
   .input-container {
-    @apply grid cursor-pointer items-center overflow-hidden rounded bg-very-light-grayish-cyan ring-light-grayish-cyan;
+    @apply grid cursor-pointer items-center overflow-hidden rounded bg-very-light-grayish-cyan;
     grid-template-columns: 3.2rem minmax(0, min-content);
 
     .icon-container {

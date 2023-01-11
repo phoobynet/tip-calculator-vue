@@ -43,10 +43,6 @@ debouncedWatch(
     debounce: 500,
   },
 )
-
-onMounted(() => {
-  selectAll()
-})
 </script>
 
 <template>

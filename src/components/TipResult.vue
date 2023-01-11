@@ -12,7 +12,7 @@ const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
         <div>Tip Amount</div>
         <div>/ person</div>
       </div>
-      <div>
+      <div class="foo">
         <Money :amount="tipAmountPerPerson" />
       </div>
     </div>
@@ -31,8 +31,8 @@ const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
 
 <style lang="scss" scoped>
 .tip-result {
-  @apply h-[257px] rounded-2xl bg-very-dark-cyan p-7 text-white;
-  @apply grid auto-rows-fr;
+  @apply grid h-[257px] grid-rows-[4.2rem_4.1rem_5rem] rounded-2xl bg-very-dark-cyan px-6 py-7 text-white;
+  @apply lg:h-full lg:w-[413px] lg:grid-rows-[6rem_10rem_5rem] lg:px-[2.5rem] lg:pt-[3rem];
 
   .amount {
     @apply flex h-[4rem] flex-row items-center justify-between;
@@ -48,6 +48,7 @@ const { tipAmountPerPerson, totalAmountPerPerson } = useTipCalculatorStore()
 
     :last-child {
       @apply text-xl text-strong-cyan;
+      @apply lg:text-2xl;
     }
   }
 

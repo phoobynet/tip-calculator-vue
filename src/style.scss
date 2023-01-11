@@ -17,9 +17,17 @@
     &::placeholder {
       @apply text-grayish-cyan;
     }
+
+    &:focus {
+      @apply border-0 outline-none;
+    }
   }
 
   input[type='number'] {
     @apply text-right;
   }
+}
+
+body {
+  @apply bg-light-grayish-cyan;
 }

@@ -68,6 +68,7 @@ debouncedWatch(
 
   .options {
     @apply grid grid-cols-2 grid-rows-3 gap-4;
+    @apply lg:grid-cols-3 lg:grid-rows-2;
 
     button {
       @apply h-[3rem] rounded bg-very-dark-cyan text-lg text-white;

@@ -16,10 +16,12 @@ import Tip from '@/components/Tip.vue'
 
 <style lang="scss" scoped>
 .home-view {
-  @apply grid h-screen grid-rows-[143px_1fr] bg-light-grayish-cyan;
+  @apply grid h-screen grid-rows-[143px_1fr] justify-center;
+  @apply lg:grid-rows-[303px_1fr] lg:justify-center;
 
   .logo-container {
     @apply flex items-center justify-center pt-1.5;
+    @apply lg:pt-20;
   }
 }
 </style>
